@@ -1,33 +1,40 @@
-const express = require('express');
-const { buildSchema } = require('graphql');
-const graphqlHTTP = require('express-graphql');
-let port = 3000;
+const { Neo4jGraphQL } = require("@neo4j/graphql");
+const { ApolloServer, gql } = require("apollo-server");
+const neo4j = require("neo4j-driver");
+const configEnv = require('dotenv').config();
 
-/* Here a simple schema is constructed using the GraphQL schema language. 
-   More information can be found in the GraphQL spec release */
-let schema = buildSchema(`
-  type Query {
-    postTitle: String,
-    blogTitle: String
+// (You may need to replace your connection details, username and password)
+const AURA_ENDPOINT = process.env.NEO4J_URI;//'neo4j+s://be7b4531.databases.neo4j.io';
+const USERNAME = process.env.NEO4J_USERNAME;//'neo4j';
+const PASSWORD = process.env.NEO4J_PASSWORD;//'vuuH4DTZe0IWgiKrvP9NEPyHaAKY8BupOfMV-d4_hig';
+const DATABASE = process.env.AURA_INSTANCENAME;
+
+// Create Neo4j driver instance
+const driver = neo4j.driver(AURA_ENDPOINT, neo4j.auth.basic(USERNAME, PASSWORD));
+const typeDefs = gql`
+  type Person {
+    name: String
+    knows: [Person!]! @relationship(type: "KNOWS", direction: OUT)
+    friendCount: Int @cypher(statement:"MATCH (this)-[:KNOWS]->(p:Person) RETURN count(p)")
   }
-`);
+`;
 
-// Root provides a resolver function for each API endpoint
-let root = {
-  postTitle: () => {
-    return 'Build a Simple GraphQL Server With Express and NodeJS';
-  },
-  blogTitle: () => {
-    return 'scotch.io';
-  }
-};
+// Create instance that contains executable GraphQL schema from GraphQL type definitions
+const neo4jGraphQL = new Neo4jGraphQL({
+  typeDefs,
+  driver
+});
 
-const app = express();
-app.use('/', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true//Set to false if you don't want graphiql enabled
-}));
+// Generate schema
+neo4jGraphQL.getSchema().then((schema) => {
+  // Create ApolloServer instance to serve GraphQL schema
+  const server = new ApolloServer({
+    schema,
+    context: { driverConfig: { database: DATABASE } }
+  });
 
-app.listen(port);
-console.log('GraphQL API server running at localhost:'+ port);
+  // Start ApolloServer
+  server.listen().then(({ url }) => {
+    console.log(`GraphQL server ready at ${url}`);
+  });
+});
