@@ -12,12 +12,44 @@ const DATABASE = process.env.AURA_INSTANCENAME;
 // Create Neo4j driver instance
 const driver = neo4j.driver(AURA_ENDPOINT, neo4j.auth.basic(USERNAME, PASSWORD));
 const typeDefs = gql`
-  type Person {
+  type People {
     name: String
-    knows: [Person!]! @relationship(type: "KNOWS", direction: OUT)
-    friendCount: Int @cypher(statement:"MATCH (this)-[:KNOWS]->(p:Person) RETURN count(p)")
+    knows: [People!]! @relationship(type: "KNOWS", direction: OUT)
+    friendCount: Int @cypher(statement:"MATCH (this)-[:KNOWS]->(p:People) RETURN count(p)")
+  }
+
+  type Customer {
+    CustomerName: String
+    CustomerCode: String
+    Gender: Int
+    Phone: String
+    has_phone: [Customer!]! @relationship(type: "HAS_PHONE", direction: OUT)
+  }
+
+  type Phone {
+    Phone: String
   }
 `;
+
+
+const checkConnect = async () =>  {
+  try {
+    await driver.verifyConnectivity()
+    console.log('Driver created')
+  } catch (error) {
+    console.log(`connectivity verification failed. ${error}`)
+  }
+
+  const session = driver.session()
+  try {
+    await session.run('CREATE (i:Item)')
+  } catch (error) {
+    console.log(`unable to execute query. ${error}`)
+  } finally {
+    await session.close()
+  }
+}
+
 
 // Create instance that contains executable GraphQL schema from GraphQL type definitions
 const neo4jGraphQL = new Neo4jGraphQL({
@@ -35,6 +67,7 @@ neo4jGraphQL.getSchema().then((schema) => {
 
   // Start ApolloServer
   server.listen().then(({ url }) => {
+    checkConnect();
     console.log(`GraphQL server ready at ${url}`);
   });
 });
