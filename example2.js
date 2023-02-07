@@ -23,30 +23,11 @@ const typeDefs = gql`
     CustomerCode: String
     Gender: Int
     Phone: String
-    PhoneRef: [Phone!]! @relationship(type: "HAS_PHONE", direction: OUT)
+    has_phone: [Customer!]! @relationship(type: "HAS_PHONE", direction: OUT)
   }
 
-  type Phone {    
+  type Phone {
     Phone: String
-    Customer: [Customer!]! @relationship(type: "HAS_PHONE", direction: IN)
-    customerCount: Int @cypher(statement:"MATCH (this)<-[:HAS_PHONE]-(p:Customer) RETURN count(p)")
-  }
-
-  type Query {
-    findCustomerByPhone(Phone: String): [Customer]
-    @cypher(
-      statement:"""
-        OPTIONAL match(c:Customer{Phone:$Phone})
-        return distinct c
-      """
-    )
-    findCustomerByGender(Gender: Int): [Customer]
-    @cypher(
-      statement: """
-        MATCH (c:Customer {Gender: $Gender})
-        RETURN c
-      """
-    )
   }
 `;
 
