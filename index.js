@@ -1,5 +1,5 @@
 const express = require("express");
-const { Neo4jGraphQL } = require("@neo4j/graphql");
+//const { Neo4jGraphQL } = require("@neo4j/graphql");
 const neo4j = require("neo4j-driver");
 const { ApolloServer } = require("apollo-server-express");
 const http = require("http");
@@ -57,11 +57,11 @@ const resolvers = {
   },
 };
 
-const neo4jGraphQL = new Neo4jGraphQL({
-  typeDefs,
-  driver,
-  resolvers
-});
+// const neo4jGraphQL = new Neo4jGraphQL({
+//   typeDefs,
+//   driver,
+//   resolvers
+// });
 
 const checkConnect = async () =>  {
   try {
