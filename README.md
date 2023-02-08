@@ -21,3 +21,30 @@ https://workspace-preview.neo4j.io/workspace/query
 
 # Some key
 - yarn cache clean : remove cache
+
+# Query test
+    1. Query
+    http://localhost:4000
+    QUERY
+        query FindCustomerByPhone($phone: String) {
+            findCustomerByPhone(Phone: $phone) {
+                CustomerCode
+                CustomerName
+                Gender
+            }
+        }
+    GRAPHQL VARIABLES
+        {
+        "phone": "0944601709"
+        }
+    2. Select Customer
+        {
+            phones{
+                Phone
+                Customer{
+                    CustomerCode
+                    CustomerName
+                },
+                customerCount
+            }
+        }

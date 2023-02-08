@@ -12,12 +12,6 @@ const DATABASE = process.env.AURA_INSTANCENAME;
 // Create Neo4j driver instance
 const driver = neo4j.driver(AURA_ENDPOINT, neo4j.auth.basic(USERNAME, PASSWORD));
 const typeDefs = gql`
-  type People {
-    name: String
-    knows: [People!]! @relationship(type: "KNOWS", direction: OUT)
-    friendCount: Int @cypher(statement:"MATCH (this)-[:KNOWS]->(p:People) RETURN count(p)")
-  }
-
   type Customer {
     CustomerName: String
     CustomerCode: String
