@@ -18,6 +18,7 @@ AURA_INSTANCENAME=Instance01
 
 https://workspace-preview.neo4j.io/workspace/query
 
+D:\Neo4j\relate-data\dbmss\dbms-85c8a556-28a5-4450-a439-15e641e4b11b\import
 
 # Some key
 - yarn cache clean : remove cache
