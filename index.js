@@ -17,6 +17,7 @@ const typeDefs = gql`
     CustomerCode: String
     Gender: Int
     Phone: String
+    fullInfo: String! @customResolver(requires: ["CustomerName", "CustomerCode"])
     PhoneRef: [Phone!]! @relationship(type: "HAS_PHONE", direction: OUT)
   }
 
@@ -34,15 +35,23 @@ const typeDefs = gql`
         return distinct c
       """
     )
-    findCustomerByGender(Gender: Int): [Customer]
+    findCustomerByCode(CustomerCode: String): Customer
     @cypher(
-      statement: """
-        MATCH (c:Customer {Gender: $Gender})
-        RETURN c
+      statement:"""
+        OPTIONAL match(c:Customer{CustomerCode:$CustomerCode})
+        return distinct c
       """
     )
   }
 `;
+
+const resolvers = {
+  Customer: {
+    fullInfo(source) {
+        return `${source.CustomerName} - ${source.CustomerCode}`;
+    },
+  },
+};
 
 
 const checkConnect = async () =>  {
@@ -67,7 +76,8 @@ const checkConnect = async () =>  {
 // Create instance that contains executable GraphQL schema from GraphQL type definitions
 const neo4jGraphQL = new Neo4jGraphQL({
   typeDefs,
-  driver
+  driver,
+  resolvers
 });
 
 //Config port
