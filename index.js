@@ -79,7 +79,8 @@ neo4jGraphQL.getSchema().then((schema) => {
   });
 
   // Start ApolloServer
-  server.listen().then(({ url }) => {
+const PORT = process.env.PORT || 8080;
+  server.listen(PORT).then(({ url }) => {
     checkConnect();
     console.log(`GraphQL server ready at ${url}`);
   });
