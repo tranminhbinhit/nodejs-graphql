@@ -2,6 +2,7 @@
 A Simple GraphQL Server implementation using Express and Node JS
 
 # Installation
+https://stackoverflow.com/questions/68354656/unhandledpromiserejectionwarning-error-you-must-await-server-start-before
 ``` 
 npm install
 ```

@@ -63,21 +63,29 @@ const neo4jGraphQL = new Neo4jGraphQL({
   resolvers
 });
 
-let apolloServer = null;
+const checkConnect = async () =>  {
+  try {
+    await driver.verifyConnectivity()
+    console.log('Driver created')
+  } catch (error) {
+    console.log(`Connectivity verification failed. ${error}`)
+  }
+
+  // const session = driver.session()
+  // try {
+  //   await session.run('CREATE (i:Item)')
+  // } catch (error) {
+  //   console.log(`unable to execute query. ${error}`)
+  // } finally {
+  //   await session.close()
+  // }
+}
+
 async function startServer() {
-    // apolloServer = new ApolloServer({
-    //     typeDefs,
-    //     resolvers,
-    // });
-    // await apolloServer.start();
-    // apolloServer.applyMiddleware({ app });
-
-
-
-
+    checkConnect();
     neo4jGraphQL.getSchema().then( async (schema) => {
       // Create ApolloServer instance to serve GraphQL schema
-      apolloServer = new ApolloServer({
+      const apolloServer = new ApolloServer({
         schema,
         context: { driverConfig: { database: DATABASE } }
       });
@@ -87,14 +95,22 @@ async function startServer() {
     });
 }
 startServer();
-const httpserver = http.createServer(app);
+//const httpserver = http.createServer(app);
 
-app.get("/rest", function (req, res) {
+app.get("/test", function (req, res) {
     res.json({ data: "api working" });
 });
+app.get(
+  "/",
+  function (request, response) {
+    response.sendFile(
+      __dirname + "/static/welcome-page.html"
+    );
+  }
+);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
-    console.log(`server running on port ${PORT}`);
-    console.log(`gql path is`);
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Graphql path is ${`/graphql`}`);
 });
