@@ -70,6 +70,9 @@ const neo4jGraphQL = new Neo4jGraphQL({
   driver
 });
 
+//Config port
+const PORT = process.env.PORT || 8080;
+
 // Generate schema
 neo4jGraphQL.getSchema().then((schema) => {
   // Create ApolloServer instance to serve GraphQL schema
@@ -79,7 +82,6 @@ neo4jGraphQL.getSchema().then((schema) => {
   });
 
   // Start ApolloServer
-const PORT = process.env.PORT || 8080;
   server.listen(PORT).then(({ url }) => {
     checkConnect();
     console.log(`GraphQL server ready at ${url}`);
