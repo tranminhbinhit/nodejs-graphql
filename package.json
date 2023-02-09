@@ -25,15 +25,15 @@
   },
   "homepage": "https://github.com/codediger/graphql-express-nodejs#readme",
   "dependencies": {
+    "neo4j-driver": "^5.5.0",
+    "graphql": "^16.6.0",
     "@neo4j/graphql": "^3.16.0",
     "apollo-server": "^3.11.1",
     "apollo-server-express": "^3.11.1",
     "camelcase": "^7.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.15.3",
-    "graphql": "^16.6.0",
     "http": "^0.0.1-security",
-    "lodash": "^4.17.4",
-    "neo4j-driver": "^5.5.0"
+    "lodash": "^4.17.4"
   }
 }
