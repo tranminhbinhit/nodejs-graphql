@@ -31,7 +31,6 @@
     "camelcase": "^7.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.15.3",
-    "express-graphql": "^0.6.6",
     "graphql": "^16.6.0",
     "http": "^0.0.1-security",
     "lodash": "^4.17.4",
