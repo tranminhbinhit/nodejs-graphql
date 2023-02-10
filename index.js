@@ -101,7 +101,7 @@ app.get("/test", function (req, res) {
     res.json({ data: "api working" });
 });
 app.get(
-  "/hah",
+  "/",
   function (request, response) {
     response.sendFile(
       __dirname + "/static/welcome-page.html"
