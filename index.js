@@ -1,6 +1,6 @@
 const express = require("express");
-const { Neo4jGraphQL } = require("@neo4j/graphql");
 const neo4j = require("neo4j-driver");
+const { Neo4jGraphQL } = require("@neo4j/graphql");
 const { ApolloServer } = require("apollo-server-express");
 const http = require("http");
 const configEnv = require('dotenv').config();
@@ -101,7 +101,7 @@ app.get("/test", function (req, res) {
     res.json({ data: "api working" });
 });
 app.get(
-  "/",
+  "/hah",
   function (request, response) {
     response.sendFile(
       __dirname + "/static/welcome-page.html"
@@ -111,6 +111,6 @@ app.get(
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
-    console.log(`Server running on port ${PORT}`);
-    console.log(`Graphql path is ${`/graphql`}`);
+  console.log(`Server running on port ${PORT}`);
+  console.log(`GraphQL API server running at http://localhost:${PORT}/graphql`);
 });
