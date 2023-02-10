@@ -2,14 +2,10 @@
 A Simple GraphQL Server implementation using Express and Node JS
 
 # Installation
-https://stackoverflow.com/questions/68354656/unhandledpromiserejectionwarning-error-you-must-await-server-start-before
 ``` 
 npm install
 ```
-Run it using `node server.js` in the root directory of your application.
-
-
-https://console.neo4j.io/
+Run it using `node index.js` in the root directory of your application.
 
 # Wait 60 seconds before connecting using these details, or login to https://console.neo4j.io to validate the Aura Instance is available
 NEO4J_URI=neo4j+s://be7b4531.databases.neo4j.io
@@ -17,8 +13,7 @@ NEO4J_USERNAME=neo4j
 NEO4J_PASSWORD=vuuH4DTZe0IWgiKrvP9NEPyHaAKY8BupOfMV-d4_hig
 AURA_INSTANCENAME=Instance01
 
-https://workspace-preview.neo4j.io/workspace/query
-
+Root Add data
 D:\Neo4j\relate-data\dbmss\dbms-85c8a556-28a5-4450-a439-15e641e4b11b\import
 
 # Some key
@@ -26,7 +21,7 @@ D:\Neo4j\relate-data\dbmss\dbms-85c8a556-28a5-4450-a439-15e641e4b11b\import
 
 # Query test
     1. Query
-    http://localhost:4000
+    http://localhost:4000/graphql
     QUERY
         query FindCustomerByPhone($phone: String) {
             findCustomerByPhone(Phone: $phone) {
