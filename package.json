@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@neo4j/graphql": "^3.16.0",
-    "camelcase": "^6.3.0",
     "neo4j-driver": "^5.5.0"
   }
 }
