@@ -88,7 +88,7 @@ async function startServer() {
       const apolloServer = new ApolloServer({
         schema,
         context: { driverConfig: { database: DATABASE } },
-        introspection: true
+        introspection: process.env.APOLLO_ENV == 'dev'
       });
     
       await apolloServer.start();
