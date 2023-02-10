@@ -87,7 +87,8 @@ async function startServer() {
       // Create ApolloServer instance to serve GraphQL schema
       const apolloServer = new ApolloServer({
         schema,
-        context: { driverConfig: { database: DATABASE } }
+        context: { driverConfig: { database: DATABASE } },
+        introspection: true
       });
     
       await apolloServer.start();

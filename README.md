@@ -32,7 +32,7 @@ D:\Neo4j\relate-data\dbmss\dbms-85c8a556-28a5-4450-a439-15e641e4b11b\import
         }
     GRAPHQL VARIABLES
         {
-        "phone": "0944601709"
+            "phone": "0944601709"
         }
     2. Select Customer
         {
