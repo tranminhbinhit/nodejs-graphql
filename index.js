@@ -91,7 +91,7 @@ async function startServer() {
       });
     
       await apolloServer.start();
-      apolloServer.applyMiddleware({ app });  
+      apolloServer.applyMiddleware({ app , path: '/'});  
     });
 }
 startServer();
@@ -100,14 +100,14 @@ startServer();
 app.get("/test", function (req, res) {
     res.json({ data: "api working" });
 });
-app.get(
-  "/",
-  function (request, response) {
-    response.sendFile(
-      __dirname + "/static/welcome-page.html"
-    );
-  }
-);
+// app.get(
+//   "/",
+//   function (request, response) {
+//     response.sendFile(
+//       __dirname + "/static/welcome-page.html"
+//     );
+//   }
+// );
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, function () {
