@@ -39,7 +39,7 @@
     "@graphql-tools/schema": "^9.0.16",
     "@graphql-tools/utils": "^9.2.1",
     "@neo4j/graphql": "^3.16.0",
-    "camelcase": "^7.0.1",
+    "camelcase": "^6.3.0",
     "neo4j-driver": "^5.5.0"
   }
 }
