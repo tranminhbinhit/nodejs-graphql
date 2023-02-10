@@ -1,6 +1,6 @@
 const express = require("express");
 const neo4j = require("neo4j-driver");
-const { Neo4jGraphQL } = require("@neo4j/graphql");
+const { Neo4jGraphQL } = require("./modules/@neo4j/graphql");
 const { ApolloServer } = require("apollo-server-express");
 const http = require("http");
 const configEnv = require('dotenv').config();

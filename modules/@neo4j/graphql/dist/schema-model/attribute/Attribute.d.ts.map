@@ -1,0 +1,1 @@
+{"version":3,"file":"Attribute.d.ts","sourceRoot":"","sources":["../../../src/schema-model/attribute/Attribute.ts"],"names":[],"mappings":"AAmBA,OAAO,KAAK,EAAE,UAAU,EAAE,MAAM,0BAA0B,CAAC;AAE3D,qBAAa,SAAS;IAClB,SAAgB,IAAI,EAAE,MAAM,CAAC;IAC7B,SAAgB,WAAW,EAAE,UAAU,EAAE,CAAC;gBAE9B,EAAE,IAAI,EAAE,WAAW,EAAE,EAAE;QAAE,IAAI,EAAE,MAAM,CAAC;QAAC,WAAW,EAAE,UAAU,EAAE,CAAA;KAAE;CAIjF"}

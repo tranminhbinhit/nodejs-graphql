@@ -1,0 +1,1 @@
+{"version":3,"file":"Variable.d.ts","sourceRoot":"","sources":["../../src/references/Variable.ts"],"names":[],"mappings":"AAmBA,OAAO,EAAE,cAAc,EAAE,SAAS,EAAE,MAAM,aAAa,CAAC;AAExD;;GAEG;AACH,qBAAa,QAAS,SAAQ,SAAS;;CAItC;AAED;;GAEG;AACH,qBAAa,aAAc,SAAQ,QAAS,YAAW,cAAc;IACjE,SAAgB,EAAE,EAAE,MAAM,CAAC;gBAEf,IAAI,EAAE,MAAM;CAK3B"}
